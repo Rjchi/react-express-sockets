@@ -1,6 +1,6 @@
-import "./App.css";
 import io from "socket.io-client";
 import { useState, useEffect } from "react";
+import styles from "./App.module.css";
 
 // Le indicamos donde esta el servidor de webSockets esto nos devuelve un objeto
 // este objeto es el puente de conexion entre el back y el front
@@ -19,7 +19,7 @@ const App = () => {
       from: "Me",
     };
     // Esto es para que el mensaje mas nuevo aparesca primero
-    setMessages([newMessage, ...messages]);
+    setMessages([...messages, newMessage]);
     setMessage("");
   };
 
@@ -27,11 +27,11 @@ const App = () => {
     // Cuando escuchemos el evento que viene del backend
     const receiveMessage = (message) => {
       setMessages([
+        ...messages,
         {
           body: message.body,
           from: message.from,
         },
-        ...messages,
       ]);
     };
     socket.on("message", receiveMessage);
@@ -43,24 +43,28 @@ const App = () => {
   }, [message, messages]);
 
   return (
-    <div>
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <input
-          type="text"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-        />
-        <button type="submit">Enviar</button>
-      </form>
-      {messages &&
-        messages.map((message, index) => {
-          return (
-            <div key={index}>
-              <strong>{message.from}</strong>
-              <p>{message.body}</p>
-            </div>
-          );
-        })}
+    <div className={styles.content}>
+      <div className={styles.containerOne}>
+        {messages &&
+          messages.map((message, index) => {
+            return (
+              <div key={index} className={message.from === "Me" ? styles.me : styles.other}>
+                <p className={styles.name}>{message.from}</p>
+                <p className={styles.body}>{message.body}</p>
+              </div>
+            );
+          })}
+      </div>
+      <div className={styles.containerTwo}>
+        <form className={styles.form} onSubmit={(e) => handleSubmit(e)}>
+          <input
+            type="text"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+          />
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
     </div>
   );
 };
