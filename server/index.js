@@ -24,8 +24,13 @@ app.use(morgan("dev"));
 
 // Asi escuchamos un evento de conexion y hacemos algo
 io.on('connection', (socket) => {
-    console.log(`ID del cliente conectado: ${socket.id}`)
-})
+    console.log(`ID del cliente conectado: ${socket.id}`);
 
+    // Aqui escuchamos el evento message del front end
+    socket.on('message', (data) => {
+        // Reenviamos el mensaje a el o los clientes
+        socket.broadcast.emit('message', data);
+    })
+})
 // Debemos arrancar el servidor HTTP no app
 server.listen(PORT ?? 5000, () => console.log(`Server started on PORT ${PORT ?? 5000}`));
