@@ -7,6 +7,8 @@ const http = require("http");
 const cors = require("cors");
 const PORT = require("./config")
 
+const { join } = require("path");
+
 // Servidor de express
 const app = express();
 // Servidor HTTP
@@ -35,5 +37,10 @@ io.on('connection', (socket) => {
         });
     })
 })
+
+// Servimos archivos estaticos asi:
+// Antes de hacer esto se debe hacer un build de del cliente de react
+app.use(express.static(join(__dirname, "../client/build")))
+
 // Debemos arrancar el servidor HTTP no app
 server.listen(PORT ?? 5000, () => console.log(`Server started on PORT ${PORT ?? 5000}`));
