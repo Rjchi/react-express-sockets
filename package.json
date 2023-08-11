@@ -1,0 +1,28 @@
+{
+  "name": "react-express-sockets",
+  "version": "0.0.1",
+  "description": "Chat en tiempo real utilizando Socket.io, express js, tailwind css y react",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "nodemon server/index.js"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "socket",
+    "tailwind",
+    "express"
+  ],
+  "author": "Rjchi",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
