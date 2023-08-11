@@ -28,8 +28,11 @@ io.on('connection', (socket) => {
 
     // Aqui escuchamos el evento message del front end
     socket.on('message', (data) => {
-        // Reenviamos el mensaje a el o los clientes
-        socket.broadcast.emit('message', data);
+        // Reenviamos el mensaje a el o los clientes mas el id del socket
+        socket.broadcast.emit('message', {
+            body: data,
+            from: socket.id,
+        });
     })
 })
 // Debemos arrancar el servidor HTTP no app
