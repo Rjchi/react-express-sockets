@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // Servidor de WebSockets
 const io = new SocketServer(server, {
     cors: {
-        origin: '*', // --> Con esto * decimos que cualquiera se puede conectar, tambien podemos ser especificos
+        origin: 'https://main--beamish-squirrel-d759ed.netlify.app', // --> Con esto * decimos que cualquiera se puede conectar, tambien podemos ser especificos
     }
 });
 
@@ -43,4 +43,4 @@ io.on('connection', (socket) => {
 app.use(express.static(join(__dirname, "../client/build")))
 
 // Debemos arrancar el servidor HTTP no app
-server.listen(PORT ?? 5000, () => console.log(`Server started on PORT ${PORT ?? 5000}`));
+server.listen(PORT ?? 80, () => console.log(`Server started on PORT ${PORT ?? 80}`));
