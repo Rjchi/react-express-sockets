@@ -5,7 +5,7 @@ import styles from "./App.module.css";
 // Le indicamos donde esta el servidor de webSockets esto nos devuelve un objeto
 // este objeto es el puente de conexion entre el back y el front
 // const socket = io("http://localhost:5000");
-const socket = io('https://main--beamish-squirrel-d759ed.netlify.app');
+const socket = io(process.env.REACT_APP_SOCKET_URL);
 
 const App = () => {
   const [message, setMessage] = useState("");
