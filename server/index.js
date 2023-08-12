@@ -16,7 +16,7 @@ const server = http.createServer(app);
 // Servidor de WebSockets
 const io = new SocketServer(server, {
     cors: {
-        origin: '*', // --> Con esto * decimos que cualquiera se puede conectar, tambien podemos ser especificos
+        //origin: '*', // --> Con esto * decimos que cualquiera se puede conectar, tambien podemos ser especificos
     }
 });
 
